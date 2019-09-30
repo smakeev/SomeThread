@@ -1,0 +1,6 @@
+framework module SomeThread {
+  umbrella header "SomeThread.h"
+
+  export *
+  //module  { export * }
+}
