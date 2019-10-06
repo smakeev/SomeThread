@@ -112,7 +112,7 @@
 	proxy->_timer = [NSTimer timerWithTimeInterval:interval repeats:yesNo block:^(NSTimer *timer)
 					 {
 						 BOOL repeats = yesNo;
-						 block(timer);
+						 block((NSTimer*)proxy);
 						 if(!repeats)
 						 {
 							 [_thread timerDone];
@@ -375,7 +375,7 @@
 	[_thread.condition unlock];
 }
 
-- (void) performBlock:( void(^ _Nonnull )(void)) block
+- (void) performBlock:(dispatch_block_t _Nonnull ) block
 {
 	if (_thread.done)
 	{
@@ -391,7 +391,7 @@
 }
 
 
-- (void) performBlock:( void(^ _Nonnull )(void)) block afterDelay:(NSTimeInterval) delay
+- (void) performAfterDelay:(NSTimeInterval) delay block:(dispatch_block_t _Nonnull ) block
 {
 	if (_thread.done)
 	{
@@ -423,11 +423,11 @@
 }
 
 
-- (void) performBlockSynchroniously:(void(^ _Nonnull)(void)) block
+- (void) performBlockSynchroniously:(dispatch_block_t _Nonnull ) block
 {
 	if (_thread.done)
 	{
-		NSLog(@"SomePromises WARNING: attempt to perform block on stopped thread (working = NO)");
+		NSLog(@"SomeThread WARNING: attempt to perform block on stopped thread (working = NO)");
 		return;
 	}
 	
@@ -443,7 +443,7 @@
 {
 	if (_thread.done)
 	{
-		NSLog(@"SomePromises WARNING: attempt to perform invocation on stopped thread (working = NO)");
+		NSLog(@"SomeThread WARNING: attempt to perform invocation on stopped thread (working = NO)");
 		return;
 	}
 	
@@ -458,7 +458,7 @@
 {
 	if (_thread.done)
 	{
-		NSLog(@"SomePromises WARNING: attempt to perform invocation on stopped thread (working = NO)");
+		NSLog(@"SomeThread WARNING: attempt to perform invocation on stopped thread (working = NO)");
 		return;
 	}
 	
@@ -474,7 +474,7 @@
 {
 	if (_thread.done)
 	{
-		NSLog(@"SomePromises WARNING: attempt to perform invocation on stopped thread (working = NO)");
+		NSLog(@"SomeThread WARNING: attempt to perform invocation on stopped thread (working = NO)");
 		return;
 	}
 	
@@ -492,9 +492,17 @@
 	return _thread.qualityOfService;
 }
 
+- (BOOL) isWorking {
+	return [self working];
+}
+
 - (BOOL) working
 {
 	return !_thread.done;
+}
+
+-(BOOL) isActive {
+	return [self active];
 }
 
 - (BOOL) active
@@ -510,7 +518,7 @@
 {
 	if(_thread.done)
 	{
-		NSLog(@"SomePromises WARNING: attempt to stop stopped thread (working = NO)");
+		NSLog(@"SomeThread WARNING: attempt to stop stopped thread (working = NO)");
 		return;
 	}
 	

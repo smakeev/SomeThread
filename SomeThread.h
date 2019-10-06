@@ -64,13 +64,13 @@ NS_ASSUME_NONNULL_BEGIN
 // It does not mean that thread is active now (working on some task).
 // Returns if it can perform selector or not. NO - Thread is stopped
 - (BOOL) working;
-
+@property (readonly) BOOL isWorking;
 
 // Is it now active or not.
 //	Active - means currantly some action is in progress. NO - thread is sleeping
 //	Action could be block, invocation or timer.
 - (BOOL) active;
-
+@property (readonly) BOOL isActive;
 //Stop the thread.
 //After stop thread will ignore tasks adding.
 //Note:! Stop does not stop thread immidiatly. After finishing all active blocks it will be stopped.
@@ -87,13 +87,13 @@ NS_ASSUME_NONNULL_BEGIN
 *	- (void) performBlock:(void(^ _Nonnull)(void)) block;
 *	Add block to tasks.
 *************************************************************************************************************************/
-- (void) performBlock:(void(^ _Nonnull)(void)) block;
+- (void) performBlock:(dispatch_block_t _Nonnull ) block NS_SWIFT_NAME(perform(block:));
 
 /************************************************************************************************************************
 *	- (void) performBlockOnMain:(dispatch_block_t)block
 *	Add block to tasks. Block will be started on main thread insted of this thread, but thread will be waiting for it's ending.
 *************************************************************************************************************************/
-- (void) performBlockOnMain:(dispatch_block_t _Nonnull )block;
+- (void) performBlockOnMain:(dispatch_block_t _Nonnull)block NS_SWIFT_NAME(performOnMain(block:));
 
 /************************************************************************************************************************
 *	- (void) performBlock:( void(^ _Nonnull )(void)) block afterDelay:(NSTimeInterval) delay;
@@ -101,13 +101,13 @@ NS_ASSUME_NONNULL_BEGIN
 *	Delay will be started only when the task is active.
 *	So if you have many tasks before, delay will be actually longer.
 *************************************************************************************************************************/
-- (void) performBlock:( void(^ _Nonnull )(void)) block afterDelay:(NSTimeInterval) delay;
+- (void) performAfterDelay:(NSTimeInterval) delay block:(dispatch_block_t _Nonnull ) block NS_SWIFT_NAME(perform(after:block:));
 
 /************************************************************************************************************************
 *	- (void) performBlockSynchroniously:(void(^ _Nonnull)(void)) block;
 *	Add block to tasks. Task will be started synchroniously.
 *************************************************************************************************************************/
-- (void) performBlockSynchroniously:(void(^ _Nonnull)(void)) block;
+- (void) performBlockSynchroniously:(dispatch_block_t _Nonnull ) block NS_SWIFT_NAME(performSynchroniously(block:));
 
 /************************************************************************************************************************
 *	- (void) performInvocation:(NSInvocation*)invocation
