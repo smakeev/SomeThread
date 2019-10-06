@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { 'Sergey Makeev' => 'Makeev.87@gmail.com' }
   s.source       = { :git => "https://github.com/smakeev/SomeThread.git", :tag => s.version.to_s }
-  s.ios.deployment_target = '8.0'
-  s.tvos.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
+  s.tvos.deployment_target = '10.0'
   s.source_files = '*.{h,m}'
   s.requires_arc = true
 end
