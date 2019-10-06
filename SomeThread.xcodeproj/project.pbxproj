@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		B6374579234A5D0000E8B50C /* SomeThread.m in Sources */ = {isa = PBXBuildFile; fileRef = B6374572234A5CFF00E8B50C /* SomeThread.m */; };
 		B637457A234A5D0000E8B50C /* SomeThread.h in Headers */ = {isa = PBXBuildFile; fileRef = B6374573234A5D0000E8B50C /* SomeThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B6374587234A5E6200E8B50C /* SomeThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6374586234A5E6200E8B50C /* SomeThreadTests.swift */; };
 		B6374589234A5E6200E8B50C /* SomeThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6374565234A5C0200E8B50C /* SomeThread.framework */; };
+		B6374592234A5FCA00E8B50C /* SomeThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6374590234A5FCA00E8B50C /* SomeThreadTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +32,8 @@
 		B6374575234A5D0000E8B50C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		B637457F234A5E3100E8B50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		B6374584234A5E6200E8B50C /* SomeThreadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SomeThreadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6374586234A5E6200E8B50C /* SomeThreadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeThreadTests.swift; sourceTree = "<group>"; };
-		B6374588234A5E6200E8B50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6374590234A5FCA00E8B50C /* SomeThreadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeThreadTests.swift; sourceTree = "<group>"; };
+		B6374591234A5FCA00E8B50C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				B6374567234A5C0200E8B50C /* SomeThread */,
-				B6374585234A5E6200E8B50C /* SomeThreadTests */,
+				B637458F234A5FCA00E8B50C /* SomeThreadTests */,
 				B6374566234A5C0200E8B50C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,14 +86,14 @@
 			path = SomeThread;
 			sourceTree = "<group>";
 		};
-		B6374585234A5E6200E8B50C /* SomeThreadTests */ = {
+		B637458F234A5FCA00E8B50C /* SomeThreadTests */ = {
 			isa = PBXGroup;
 			children = (
-				B6374586234A5E6200E8B50C /* SomeThreadTests.swift */,
-				B6374588234A5E6200E8B50C /* Info.plist */,
+				B6374590234A5FCA00E8B50C /* SomeThreadTests.swift */,
+				B6374591234A5FCA00E8B50C /* Info.plist */,
 			);
 			path = SomeThreadTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -211,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6374587234A5E6200E8B50C /* SomeThreadTests.swift in Sources */,
+				B6374592234A5FCA00E8B50C /* SomeThreadTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
