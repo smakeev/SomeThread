@@ -151,4 +151,45 @@ class SomeThreadTests: XCTestCase {
 		XCTAssert(iteration == 4)
 	}
 	
+	func testCount() {
+		let thread = SomeThread(name: "CountTest")
+		XCTAssert(thread.count == 0)
+		thread.perform {
+			sleep(5)
+		}
+		XCTAssert(thread.count == 1)
+		thread.perform {
+			sleep(5)
+		}
+		XCTAssert(thread.count == 2)
+		sleep(5)
+		XCTAssert(thread.count == 1)
+		sleep(15)
+		XCTAssert(thread.count == 0)
+	}
+	
+	func testTimersCount() {
+		let thread = SomeThread(name: "TimersCountTest")
+		XCTAssert(thread.timersCount == 0)
+		var iteration = 0
+		var finished = false
+		thread.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+			XCTAssert(!Thread.current.isMainThread)
+			iteration += 1
+			
+			if iteration > 2 {
+				timer.invalidate()
+				finished = true
+			}
+		}
+		sleep(1) //to let thread start working
+		XCTAssert(thread.timersCount == 1)
+		while(thread.isActive && thread.timersCount == 1) {
+			XCTAssert(thread.timersCount == 1 || thread.timersCount == 0)
+		}
+		sleep(2)
+		XCTAssert(finished)
+		XCTAssert(thread.timersCount == 0)
+	}
+	
 }

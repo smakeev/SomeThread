@@ -16,7 +16,9 @@
 	NSCondition* _condition; //to notifay we have a block
 	BOOL _isActive;
 	
+	@public
 	NSInteger _timersCount;
+	NSInteger _count;
 }
 
 @property (atomic) BOOL done;
@@ -242,6 +244,9 @@
 #endif
 - (void) runBlock:(void(^ _Nonnull)(void)) block
 {
+	[_condition lock];
+	_count--;
+	[_condition unlock];
 	block();
 }
 
@@ -366,6 +371,23 @@
 	return self;
 }
 
+- (NSInteger) timersCount {
+	NSInteger count = 0;
+	[_thread.condition lock];
+	count = _thread->_timersCount;
+	[_thread.condition unlock];
+	return count;
+}
+
+- (NSInteger) count {
+
+	NSInteger count = 0;
+	[_thread.condition lock];
+	count = _thread->_count;
+	[_thread.condition unlock];
+	return count;
+}
+
 - (void) performStopBlock
 {
 	[_thread performSelector:@selector(runBlock:) onThread:_thread withObject:^(){} waitUntilDone:NO];
@@ -385,6 +407,7 @@
 	
 	[_thread performSelector:@selector(runBlock:) onThread:_thread withObject:[block copy] waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -402,6 +425,7 @@
 	_BlockDelayWrapper *wrapper = [[_BlockDelayWrapper alloc] initWithBlock:block delay:delay];
 	[_thread performSelector:@selector(runBlockWithWrapper:) onThread:_thread withObject:wrapper waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -417,6 +441,7 @@
 	
 	[_thread performSelector:@selector(runBlockOnMain:) onThread:_thread withObject:[block copy] waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -433,6 +458,7 @@
 	
 	[_thread performSelector:@selector(runBlock:) onThread:_thread withObject:[block copy] waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -449,6 +475,7 @@
 	
 	[invocation performSelector:@selector(invoke) onThread:_thread withObject:nil waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -465,6 +492,7 @@
 	_BlockDelayWrapper *wrapper = [[_BlockDelayWrapper alloc] initWithInvocation:invocation delay:delay];
 	[_thread performSelector:@selector(runInvocationWithWrapper:) onThread:_thread withObject:wrapper waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
@@ -480,6 +508,7 @@
 	
 	[invocation performSelector:@selector(invoke) onThread:_thread withObject:nil waitUntilDone:NO];
 	[_thread.condition lock];
+	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];
