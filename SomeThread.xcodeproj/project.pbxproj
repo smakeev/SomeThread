@@ -11,6 +11,9 @@
 		B637457A234A5D0000E8B50C /* SomeThread.h in Headers */ = {isa = PBXBuildFile; fileRef = B6374573234A5D0000E8B50C /* SomeThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6374589234A5E6200E8B50C /* SomeThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6374565234A5C0200E8B50C /* SomeThread.framework */; };
 		B6374592234A5FCA00E8B50C /* SomeThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6374590234A5FCA00E8B50C /* SomeThreadTests.swift */; };
+		B6CCE3BE23550AEB00A4ADB7 /* STFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = B6CCE3BC23550AEB00A4ADB7 /* STFuture.h */; };
+		B6CCE3BF23550AEB00A4ADB7 /* STFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = B6CCE3BD23550AEB00A4ADB7 /* STFuture.m */; };
+		B6CCE3C023550AEB00A4ADB7 /* STFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = B6CCE3BD23550AEB00A4ADB7 /* STFuture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 		B6374584234A5E6200E8B50C /* SomeThreadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SomeThreadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6374590234A5FCA00E8B50C /* SomeThreadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeThreadTests.swift; sourceTree = "<group>"; };
 		B6374591234A5FCA00E8B50C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6CCE3BC23550AEB00A4ADB7 /* STFuture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFuture.h; sourceTree = SOURCE_ROOT; };
+		B6CCE3BD23550AEB00A4ADB7 /* STFuture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFuture.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,8 @@
 				B6374571234A5CFF00E8B50C /* README.md */,
 				B6374573234A5D0000E8B50C /* SomeThread.h */,
 				B6374572234A5CFF00E8B50C /* SomeThread.m */,
+				B6CCE3BC23550AEB00A4ADB7 /* STFuture.h */,
+				B6CCE3BD23550AEB00A4ADB7 /* STFuture.m */,
 				B6374570234A5CFF00E8B50C /* SomeThread.podspec */,
 			);
 			path = SomeThread;
@@ -102,6 +109,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6CCE3BE23550AEB00A4ADB7 /* STFuture.h in Headers */,
 				B637457A234A5D0000E8B50C /* SomeThread.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,7 +160,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "SOME projects";
 				TargetAttributes = {
 					B6374564234A5C0200E8B50C = {
@@ -160,6 +168,7 @@
 					};
 					B6374583234A5E6200E8B50C = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -204,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6374579234A5D0000E8B50C /* SomeThread.m in Sources */,
+				B6CCE3BF23550AEB00A4ADB7 /* STFuture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6374592234A5FCA00E8B50C /* SomeThreadTests.swift in Sources */,
+				B6CCE3C023550AEB00A4ADB7 /* STFuture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +349,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -395,6 +407,7 @@
 		B637458D234A5E6200E8B50C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6WLV67D2QG;
 				INFOPLIST_FILE = SomeThreadTests/Info.plist;
@@ -415,6 +428,7 @@
 		B637458E234A5E6200E8B50C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6WLV67D2QG;
 				INFOPLIST_FILE = SomeThreadTests/Info.plist;

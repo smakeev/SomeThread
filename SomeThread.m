@@ -8,7 +8,15 @@
 
 
 #import "SomeThread.h"
+#import "STFuture.h"
 #import <objc/runtime.h>
+
+@interface STFuture (ForFriendsOnly)
+
+- (void) performActionWithResult:(id _Nullable)        result;
+- (void) performActionWithError: (NSError* _Nullable ) error;
+
+@end
 
 @interface _SomeThread : NSThread
 {
@@ -425,7 +433,6 @@
 	_BlockDelayWrapper *wrapper = [[_BlockDelayWrapper alloc] initWithBlock:block delay:delay];
 	[_thread performSelector:@selector(runBlockWithWrapper:) onThread:_thread withObject:wrapper waitUntilDone:NO];
 	[_thread.condition lock];
-	_thread->_count++;
 	_thread.runningTask = YES;
 	[_thread.condition signal];
 	[_thread.condition unlock];

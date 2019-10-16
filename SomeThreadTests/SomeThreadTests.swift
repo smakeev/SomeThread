@@ -101,6 +101,7 @@ class SomeThreadTests: XCTestCase {
 	let thread3 = SomeThread(name: "Test3")
 	var codeInDelayTestHasBeenCalled = false
 	func testPerformBlockAfterDelay() {
+		sleep(1)
 		threadToTestAfterDelay = SomeThread(name: "afterDelay")
 		let current = Date()
 		threadToTestAfterDelay?.perform(after:20) {
@@ -108,6 +109,9 @@ class SomeThreadTests: XCTestCase {
 			let current2 = Date()
 			XCTAssert(current2.timeIntervalSince1970 - current.timeIntervalSince1970 >= 20)
 		}
+		sleep(1)
+		XCTAssert(threadToTestAfterDelay?.count == 0)
+		XCTAssert(threadToTestAfterDelay?.timersCount == 1)
 
 		thread3.perform {
 			sleep(30) //wait for thread1 be finished
@@ -191,5 +195,4 @@ class SomeThreadTests: XCTestCase {
 		XCTAssert(finished)
 		XCTAssert(thread.timersCount == 0)
 	}
-	
 }

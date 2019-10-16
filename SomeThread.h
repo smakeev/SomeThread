@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 //	Just call stop after the end of the block execution.
 //=======================================================================================================================
 
+@class STFuture;
 @interface SomeThread : NSObject
 
 /************************************************************************************************************************
@@ -109,6 +110,9 @@ NS_ASSUME_NONNULL_BEGIN
 *************************************************************************************************************************/
 - (void) performBlock:(dispatch_block_t _Nonnull ) block NS_SWIFT_NAME(perform(block:));
 
+
+//- (STFuture*) return
+
 /************************************************************************************************************************
 *	- (void) performBlockOnMain:(dispatch_block_t)block
 *	Add block to tasks. Block will be started on main thread insted of this thread, but thread will be waiting for it's ending.
@@ -120,6 +124,10 @@ NS_ASSUME_NONNULL_BEGIN
 *	Add block to tasks. Task will be started after delay.
 *	Delay will be started only when the task is active.
 *	So if you have many tasks before, delay will be actually longer.
+*
+*	Calling this method does not encrise counter but it encrises timers counter instead. Technically this is a timer with
+*	no repeation.
+*
 *************************************************************************************************************************/
 - (void) performAfterDelay:(NSTimeInterval) delay block:(dispatch_block_t _Nonnull ) block NS_SWIFT_NAME(perform(after:block:));
 
